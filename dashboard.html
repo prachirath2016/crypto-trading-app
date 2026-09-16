@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Crypto Trading App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-dashboard">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>Crypto Trading App</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pay.html">Buy</a></li>
+                <li><a href="#" id="logout-btn" class="btn-nav">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="user-profile">
+                    <div class="avatar">👤</div>
+                    <div class="user-info">
+                        <p class="user-name" id="user-name">Loading...</p>
+                        <p class="user-email" id="user-email"></p>
+                    </div>
+                </div>
+                <nav class="sidebar-menu">
+                    <a href="#" class="menu-item active" data-section="overview">🏠 Overview</a>
+                    <a href="#" class="menu-item" data-section="orders">📦 My orders</a>
+                    <a href="#" class="menu-item" data-section="profile">⚙️ Profile</a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <section id="overview-section" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>Hi, <span id="welcome-name">there</span> 👋</h2>
+                    <p id="welcome-msg">Your account with Crypto Trading App</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-content">
+                            <p class="stat-label">Orders</p>
+                            <p class="stat-value" id="stat-orders">–</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💳</div>
+                        <div class="stat-content">
+                            <p class="stat-label">Total spent</p>
+                            <p class="stat-value" id="stat-spent">–</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <p class="stat-label">Member since</p>
+                            <p class="stat-value" id="stat-since">–</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick actions</h3>
+                    <div class="actions-grid">
+                        <a class="action-btn" href="pay.html">🛒 Buy / book</a>
+                        <a class="action-btn" href="#" data-goto="orders">📦 See my orders</a>
+                        <a class="action-btn" href="index.html">🌐 Back to the site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="orders-section" class="dashboard-section">
+                <div class="section-header">
+                    <h2>My orders</h2>
+                    <a class="btn btn-primary" href="pay.html">+ New order</a>
+                </div>
+                <div class="products-list" id="orders-list">
+                    <p>Loading your orders...</p>
+                </div>
+            </section>
+
+            <section id="profile-section" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Profile</h2>
+                </div>
+                <form class="settings-form" id="profile-form">
+                    <div class="form-group">
+                        <label for="profile-name">Name</label>
+                        <input type="text" id="profile-name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-email">Email</label>
+                        <input type="email" id="profile-email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-phone">Phone (optional)</label>
+                        <input type="tel" id="profile-phone" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <span id="profile-msg" style="margin-left:12px"></span>
+                </form>
+                <p style="margin-top:32px"><a href="#" id="delete-account" style="color:#b3261e">Delete my account</a></p>
+            </section>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
