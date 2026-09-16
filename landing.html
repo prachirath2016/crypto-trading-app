@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexbit — Crypto Trading, Simplified</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --bg-alt: #101626;
+    --card: #131a2c;
+    --border: #22293d;
+    --text: #e7ebf5;
+    --muted: #8b93a7;
+    --gold: #f2b705;
+    --teal: #17c3b2;
+    --red: #ef5b5b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  img, svg { display: block; }
+
+  .wrap {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* HEADER */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 14, 23, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 2px;
+    transform: rotate(45deg);
+  }
+
+  nav.links {
+    display: none;
+    gap: 28px;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  nav.links a:hover { color: var(--text); }
+
+  @media (min-width: 800px) {
+    nav.links { display: flex; }
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #1a1204;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.25);
+  }
+
+  .btn-ghost {
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .btn-small { padding: 8px 16px; font-size: 0.85rem; }
+
+  /* HERO */
+  .hero {
+    padding: 90px 0 70px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(23, 195, 178, 0.08), transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(242, 183, 5, 0.08), transparent 45%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
+  }
+
+  .kicker {
+    display: inline-block;
+    color: var(--teal);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(23, 195, 178, 0.1);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  h1 span { color: var(--gold); }
+
+  .hero p.lead {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .hero-cta .btn-primary { font-size: 1.05rem; padding: 14px 30px; }
+
+  .fineprint {
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  /* Ticker card in hero */
+  .ticker-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .ticker-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  .ticker-row:last-child { border-bottom: none; }
+
+  .coin { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+
+  .coin-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #0a0e17;
+  }
+
+  .up { color: var(--teal); }
+  .down { color: var(--red); }
+
+  /* SECTIONS */
+  section { padding: 80px 0; }
+
+  .section-head {
+    max-width: 620px;
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+
+  .section-head p { color: var(--muted); font-size: 1.05rem; }
+
+  /* FEATURES */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 700px) {
+    .features { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .features { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .feature-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .feature-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    width: 46px; height: 46px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .feature-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+  .feature-card p { color: var(--muted); font-size: 0.95rem; }
+
+  /* ABOUT / TRUST */
+  .about {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .about-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .about h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 18px; letter-spacing: -0.5px; }
+  .about p { color: var(--muted); margin-bottom: 16px; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .stat { text-align: left; }
+  .stat .num { font-size: 1.7rem; font-weight: 800; color: var(--gold); }
+  .stat .label { font-size: 0.82rem; color: var(--muted); }
+
+  .trust-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 30px;
+  }
+
+  .trust-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trust-item:last-child { border-bottom: none; }
+
+  .trust-item .mark {
+    color: var(--teal);
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+
+  /* CTA STRIP */
+  .cta-strip {
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .cta-strip h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-strip p {
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 30px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 50px 0 30px;
+    background: var(--bg-alt);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: 700px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+  }
+
+  .footer-grid h4 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .footer-grid ul { list-style: none; }
+  .footer-grid li { margin-bottom: 10px; font-size: 0.92rem; }
+  .footer-grid a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 700px) {
+    .footer-bottom { flex-direction: row; justify-content: space-between; }
+  }
+
+  .risk-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    max-width: 700px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="dot"></span>Nexbit</a>
+    <nav class="links">
+      <a href="#markets">Markets</a>
+      <a href="#features">Why Nexbit</a>
+      <a href="#about">Security</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-small">Log In</a>
+      <a href="pay.html" class="btn btn-primary btn-small">Start Trading</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Live · 200+ assets · No hidden fees</span>
+        <h1>Trade crypto without the <span>guesswork</span>.</h1>
+        <p class="lead">Nexbit gives you fast, transparent execution, real cold-storage security, and a clean interface — whether you're buying your first Bitcoin or running a full portfolio.</p>
+        <div class="hero-cta">
+          <a href="pay.html" class="btn btn-primary">Open an Account — Fund in Minutes</a>
+          <a href="#features" class="btn btn-ghost">See how it works</a>
+        </div>
+        <p class="fineprint">No monthly fees. 0.10% maker / 0.20% taker. Withdraw anytime.</p>
+      </div>
+
+      <div class="ticker-card">
+        <div class="ticker-row">
+          <div class="coin"><span class="coin-icon" style="background:#f2b705;">B</span> BTC / USD</div>
+          <div class="up">$67,240 ▲ 2.4%</div>
+        </div>
+        <div class="ticker-row">
+          <div class="coin"><span class="coin-icon" style="background:#17c3b2;">E</span> ETH / USD</div>
+          <div class="up">$3,412 ▲ 1.1%</div>
+        </div>
+        <div class="ticker-row">
+          <div class="coin"><span class="coin-icon" style="background:#8b93a7;">S</span> SOL / USD</div>
+          <div class="down">$142.80 ▼ 0.6%</div>
+        </div>
+        <div class="ticker-row">
+          <div class="coin"><span class="coin-icon" style="background:#ef5b5b;">X</span> XRP / USD</div>
+          <div class="up">$0.612 ▲ 0.9%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Everything you need, nothing you don't</h2>
+        <p>Six ways Nexbit makes trading crypto feel less like a casino and more like managing your money.</p>
+      </div>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(242,183,5,0.12); color:var(--gold);">⚡</div>
+          <h3>Instant Execution</h3>
+          <p>Orders fill in milliseconds against deep, aggregated liquidity — no slippage surprises on market orders.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(23,195,178,0.12); color:var(--teal);">🔒</div>
+          <h3>95% Cold Storage</h3>
+          <p>The vast majority of user funds sit in offline, multi-signature cold wallets, audited quarterly by an independent firm.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(239,91,91,0.12); color:var(--red);">📊</div>
+          <h3>Real Portfolio Tools</h3>
+          <p>Track cost basis, unrealized gains, and tax-lot history in one dashboard — no spreadsheets required.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(242,183,5,0.12); color:var(--gold);">💳</div>
+          <h3>Fast Deposits & Withdrawals</h3>
+          <p>Bank transfer, card, or on-chain deposit. Most withdrawals clear same-day, with clear fee estimates upfront.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(23,195,178,0.12); color:var(--teal);">🎯</div>
+          <h3>Smart Order Types</h3>
+          <p>Limit, stop-loss, and recurring buys let you build a strategy instead of watching the chart all day.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(239,91,91,0.12); color:var(--red);">🎓</div>
+          <h3>Learn-As-You-Trade</h3>
+          <p>Plain-language guides and risk warnings built into the order flow, so beginners don't trade blind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="wrap about-grid">
+      <div>
+        <h2>Built by traders who got tired of clunky exchanges</h2>
+        <p>Nexbit started in 2021 when three former exchange engineers set out to fix the basics: clear fees, fast withdrawals, and support that actually answers. Today we serve traders in 40+ countries, from first-time buyers to active day traders.</p>
+        <p>We're not trying to be flashy — we're trying to be the exchange you'd recommend to a family member.</p>
+        <div class="stats">
+          <div class="stat"><div class="num">180K+</div><div class="label">Active accounts</div></div>
+          <div class="stat"><div class="num">$2.4B</div><div class="label">Monthly volume</div></div>
+          <div class="stat"><div class="num">99.98%</div><div class="label">Platform uptime</div></div>
+        </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-item"><span class="mark">✓</span><div><strong>Licensed & regulated</strong><br><span style="color:var(--muted); font-size:0.9rem;">Operating under registered money-services status in every market we serve.</span></div></div>
+        <div class="trust-item"><span class="mark">✓</span><div><strong>Independent audits</strong><br><span style="color:var(--muted); font-size:0.9rem;">Quarterly proof-of-reserves reports published for all users.</span></div></div>
+        <div class="trust-item"><span class="mark">✓</span><div><strong>24/7 human support</strong><br><span style="color:var(--muted); font-size:0.9rem;">Real people, average first response under 6 minutes.</span></div></div>
+        <div class="trust-item"><span class="mark">✓</span><div><strong>2FA & withdrawal locks</strong><br><span style="color:var(--muted); font-size:0.9rem;">Optional 24-hour withdrawal delay for new addresses, on by default.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip" id="faq">
+    <div class="wrap">
+      <h2>Your first trade is a few taps away</h2>
+      <p>Create an account, verify your identity, and fund it — most people are trading within 15 minutes.</p>
+      <a href="pay.html" class="btn btn-primary">Open Your Nexbit Account</a>
+      <p class="risk-note" style="margin:20px auto 0;">Crypto asset prices can be volatile. The value of your investment can go up or down and you may get back less than you invest. Nexbit is not investment advice.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="logo"><span class="dot"></span>Nexbit</a>
+        <p style="color:var(--muted); margin-top:14px; max-width:320px; font-size:0.92rem;">A straightforward crypto trading platform for people who want clarity, not chaos.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#markets">Markets</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="pay.html">Start Trading</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#about">Security</a></li>
+          <li><a href="#faq">Support</a></li>
+          <li><a href="#faq">Fees</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Nexbit Trading Ltd. All rights reserved.</span>
+      <span>Nexbit is a trading platform, not a bank. Crypto holdings are not FDIC insured.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
