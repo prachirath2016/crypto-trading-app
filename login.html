@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Crypto Trading App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>.auth-error{color:#b3261e;background:#fdecea;padding:10px 12px;border-radius:8px;margin:0 0 14px;font-size:14px}</style>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Crypto Trading App</h1>
+                <p>Sign in to your account</p>
+            </div>
+
+            <p id="auth-error" class="auth-error" hidden></p>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active-form">
+                <div class="form-group">
+                    <label for="login-email">Email address</label>
+                    <input type="email" id="login-email" placeholder="your@email.com" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </form>
+
+            <!-- Signup Form (hidden by default) -->
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <label for="signup-name">Your name</label>
+                    <input type="text" id="signup-name" placeholder="Your name" autocomplete="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email address</label>
+                    <input type="email" id="signup-email" placeholder="your@email.com" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password (8+ characters)</label>
+                    <input type="password" id="signup-password" placeholder="••••••••" autocomplete="new-password" minlength="8" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password-confirm">Confirm password</label>
+                    <input type="password" id="signup-password-confirm" placeholder="••••••••" autocomplete="new-password" minlength="8" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create account</button>
+            </form>
+
+            <div class="auth-footer">
+                <p id="toggle-form-text">
+                    New here? <a href="#" id="toggle-form">Create an account</a>
+                </p>
+                <p><a href="index.html">← Back to Crypto Trading App</a></p>
+            </div>
+        </div>
+
+        <div class="auth-benefits">
+            <div class="benefit-item">
+                <span class="benefit-icon">📦</span>
+                <p><strong>Your orders in one place</strong><br>Every purchase, with its date and amount</p>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">🔒</span>
+                <p><strong>Secure</strong><br>Passwords are stored hashed, payments run through Stripe</p>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">⚡</span>
+                <p><strong>Quick to come back</strong><br>Stay signed in on this device for 30 days</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
