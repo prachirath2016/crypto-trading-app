@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Crypto Trading App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand"><h1>Crypto Trading App</h1></div>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html" class="btn-nav">My account</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="pricing-hero">
+        <div class="container">
+            <h1>Plans</h1>
+            <p>Pick one — secure checkout by Stripe</p>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="container">
+            <div class="pricing-grid">
+                
+            <div class="pricing-card ">
+                
+                <h3>Starter</h3>
+                <div class="price">$29/mo</div>
+                <ul class="features-list">
+                    <li>✓ Basic access</li><li>✓ Up to 100 users</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='pay.html'" style="width: 100%;">
+                    Choose
+                </button>
+            </div>
+            
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <h3>Pro</h3>
+                <div class="price">$99/mo</div>
+                <ul class="features-list">
+                    <li>✓ All features</li><li>✓ Up to 1000 users</li><li>✓ Priority support</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='pay.html'" style="width: 100%;">
+                    Choose
+                </button>
+            </div>
+            
+            <div class="pricing-card ">
+                
+                <h3>Enterprise</h3>
+                <div class="price">Custom</div>
+                <ul class="features-list">
+                    <li>✓ Everything</li><li>✓ Unlimited</li><li>✓ Dedicated support</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='pay.html'" style="width: 100%;">
+                    Choose
+                </button>
+            </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <script src="auth.js"></script>
+</body>
+</html>
